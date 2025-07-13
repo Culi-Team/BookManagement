@@ -33,6 +33,8 @@
             listBook = new DataGridView();
             groupBox1 = new GroupBox();
             txtBookQuantity = new NumericUpDown();
+            RemoveBook = new Button();
+            Update = new Button();
             AddBook = new Button();
             txtPublishYear = new TextBox();
             txtAuthor = new TextBox();
@@ -58,7 +60,7 @@
             tabControl1.Location = new Point(1, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1007, 541);
+            tabControl1.Size = new Size(881, 541);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -68,7 +70,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(999, 513);
+            tabPage1.Size = new Size(873, 513);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Book Manager";
             tabPage1.UseVisualStyleBackColor = true;
@@ -76,14 +78,17 @@
             // listBook
             // 
             listBook.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            listBook.Location = new Point(19, 119);
+            listBook.Location = new Point(15, 119);
             listBook.Name = "listBook";
-            listBook.Size = new Size(955, 382);
+            listBook.Size = new Size(844, 382);
             listBook.TabIndex = 1;
+            listBook.CellMouseClick += listBook_CellMouseClick;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(txtBookQuantity);
+            groupBox1.Controls.Add(RemoveBook);
+            groupBox1.Controls.Add(Update);
             groupBox1.Controls.Add(AddBook);
             groupBox1.Controls.Add(txtPublishYear);
             groupBox1.Controls.Add(txtAuthor);
@@ -94,23 +99,43 @@
             groupBox1.Controls.Add(txtBookName);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
-            groupBox1.Location = new Point(19, 11);
+            groupBox1.Location = new Point(15, 11);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(955, 101);
+            groupBox1.Size = new Size(844, 101);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Book Manage";
+            groupBox1.Text = "Book Information";
             // 
             // txtBookQuantity
             // 
-            txtBookQuantity.Location = new Point(470, 49);
+            txtBookQuantity.Location = new Point(476, 49);
             txtBookQuantity.Name = "txtBookQuantity";
             txtBookQuantity.Size = new Size(65, 23);
             txtBookQuantity.TabIndex = 3;
             // 
+            // RemoveBook
+            // 
+            RemoveBook.Location = new Point(750, 37);
+            RemoveBook.Name = "RemoveBook";
+            RemoveBook.Size = new Size(88, 43);
+            RemoveBook.TabIndex = 2;
+            RemoveBook.Text = "Remove Book";
+            RemoveBook.UseVisualStyleBackColor = true;
+            RemoveBook.Click += RemoveBook_Click;
+            // 
+            // Update
+            // 
+            Update.Location = new Point(554, 37);
+            Update.Name = "Update";
+            Update.Size = new Size(88, 43);
+            Update.TabIndex = 2;
+            Update.Text = "Update";
+            Update.UseVisualStyleBackColor = true;
+            Update.Click += Update_Click;
+            // 
             // AddBook
             // 
-            AddBook.Location = new Point(848, 37);
+            AddBook.Location = new Point(652, 37);
             AddBook.Name = "AddBook";
             AddBook.Size = new Size(88, 43);
             AddBook.TabIndex = 2;
@@ -196,7 +221,7 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(999, 513);
+            tabPage2.Size = new Size(873, 513);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Reader Manager";
             tabPage2.UseVisualStyleBackColor = true;
@@ -205,7 +230,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1008, 537);
+            ClientSize = new Size(884, 537);
             Controls.Add(tabControl1);
             Name = "MainForm";
             Text = "MainForm";
@@ -236,5 +261,7 @@
         private Label label4;
         private NumericUpDown txtBookQuantity;
         private Label label5;
+        private Button RemoveBook;
+        private Button Update;
     }
 }

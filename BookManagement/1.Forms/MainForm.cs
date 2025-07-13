@@ -49,5 +49,43 @@ namespace BookManagement._1.Forms
             listBook.Columns["Year"].HeaderText = "Năm";
             listBook.Columns["Quantity"].HeaderText = "Số Lượng";
         }
+
+        private void Update_Click(object sender, EventArgs e)
+        {
+            var selectedBook = (Book)listBook.CurrentRow.DataBoundItem;
+
+            var updateBook = new Book
+            {
+                Id = selectedBook.Id,
+                Title = txtBookName.Text,
+                Author = txtAuthor.Text,
+                Publisher = txtPublisher.Text,
+                Year = int.Parse(txtPublishYear.Text),
+                Quantity = int.Parse(txtBookQuantity.Text),
+            };
+
+            _bookRepo.Update(updateBook);
+            LoadBooksToGrid();
+        }
+
+        private void RemoveBook_Click(object sender, EventArgs e)
+        {
+            var selectedBook = (Book)listBook.CurrentRow.DataBoundItem;
+
+            _bookRepo.Delete(selectedBook.Id);
+            LoadBooksToGrid();
+        }
+
+        private void listBook_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var selectedBook = (Book)listBook.CurrentRow.DataBoundItem;
+
+            txtBookName.Text = selectedBook.Title;
+            txtAuthor.Text = selectedBook.Author;
+            txtPublisher.Text = selectedBook.Publisher;
+            txtPublishYear.Text = selectedBook.Year.ToString();
+            txtBookQuantity.Value = selectedBook.Quantity;
+        }
+
     }
 }
