@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="1.Forms\UIControl\" />
     <Folder Include="2.Controls\" />
     <Folder Include="5.Resources\" />
   </ItemGroup>
