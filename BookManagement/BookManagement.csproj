@@ -15,12 +15,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="2.Controls\" />
     <Folder Include="5.Resources\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="1.Forms\ReaderListPopupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookManagement._4.Helpers
+namespace BookManagement._2.Controls
 {
     public class JsonRepository<T> where T : IEntity
     {
@@ -64,6 +64,14 @@ namespace BookManagement._4.Helpers
             {
                 throw new Exception("Không tìm thấy bản ghi để xóa.");
             }
+        }
+
+        public T GetItemFromId(int id)
+        {
+            var items = Load();
+            var item = items.FirstOrDefault(x=> x.Id == id);
+
+            return item;
         }
     }
 }
