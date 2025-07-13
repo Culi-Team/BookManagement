@@ -30,25 +30,25 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            dataGridView1 = new DataGridView();
+            listBook = new DataGridView();
             groupBox1 = new GroupBox();
-            numericUpDown1 = new NumericUpDown();
-            button1 = new Button();
-            textBox4 = new TextBox();
-            textBox3 = new TextBox();
+            txtBookQuantity = new NumericUpDown();
+            AddBook = new Button();
+            txtPublishYear = new TextBox();
+            txtAuthor = new TextBox();
             label4 = new Label();
-            textBox2 = new TextBox();
+            txtPublisher = new TextBox();
             label5 = new Label();
             label3 = new Label();
-            textBox1 = new TextBox();
+            txtBookName = new TextBox();
             label2 = new Label();
             label1 = new Label();
             tabPage2 = new TabPage();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)listBook).BeginInit();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtBookQuantity).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -63,7 +63,7 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(dataGridView1);
+            tabPage1.Controls.Add(listBook);
             tabPage1.Controls.Add(groupBox1);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
@@ -73,25 +73,25 @@
             tabPage1.Text = "Book Manager";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // listBook
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(19, 119);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(955, 382);
-            dataGridView1.TabIndex = 1;
+            listBook.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            listBook.Location = new Point(19, 119);
+            listBook.Name = "listBook";
+            listBook.Size = new Size(955, 382);
+            listBook.TabIndex = 1;
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(numericUpDown1);
-            groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(textBox4);
-            groupBox1.Controls.Add(textBox3);
+            groupBox1.Controls.Add(txtBookQuantity);
+            groupBox1.Controls.Add(AddBook);
+            groupBox1.Controls.Add(txtPublishYear);
+            groupBox1.Controls.Add(txtAuthor);
             groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(textBox2);
+            groupBox1.Controls.Add(txtPublisher);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(txtBookName);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(19, 11);
@@ -101,36 +101,36 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Book Manage";
             // 
-            // numericUpDown1
+            // txtBookQuantity
             // 
-            numericUpDown1.Location = new Point(470, 49);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(65, 23);
-            numericUpDown1.TabIndex = 3;
+            txtBookQuantity.Location = new Point(470, 49);
+            txtBookQuantity.Name = "txtBookQuantity";
+            txtBookQuantity.Size = new Size(65, 23);
+            txtBookQuantity.TabIndex = 3;
             // 
-            // button1
+            // AddBook
             // 
-            button1.Location = new Point(848, 37);
-            button1.Name = "button1";
-            button1.Size = new Size(88, 43);
-            button1.TabIndex = 2;
-            button1.Text = "Add Book";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            AddBook.Location = new Point(848, 37);
+            AddBook.Name = "AddBook";
+            AddBook.Size = new Size(88, 43);
+            AddBook.TabIndex = 2;
+            AddBook.Text = "Add Book";
+            AddBook.UseVisualStyleBackColor = true;
+            AddBook.Click += AddBook_Click;
             // 
-            // textBox4
+            // txtPublishYear
             // 
-            textBox4.Location = new Point(287, 69);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(105, 23);
-            textBox4.TabIndex = 1;
+            txtPublishYear.Location = new Point(287, 69);
+            txtPublishYear.Name = "txtPublishYear";
+            txtPublishYear.Size = new Size(105, 23);
+            txtPublishYear.TabIndex = 1;
             // 
-            // textBox3
+            // txtAuthor
             // 
-            textBox3.Location = new Point(287, 26);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(105, 23);
-            textBox3.TabIndex = 1;
+            txtAuthor.Location = new Point(287, 26);
+            txtAuthor.Name = "txtAuthor";
+            txtAuthor.Size = new Size(105, 23);
+            txtAuthor.TabIndex = 1;
             // 
             // label4
             // 
@@ -141,12 +141,12 @@
             label4.TabIndex = 0;
             label4.Text = "Publish year";
             // 
-            // textBox2
+            // txtPublisher
             // 
-            textBox2.Location = new Point(82, 68);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(105, 23);
-            textBox2.TabIndex = 1;
+            txtPublisher.Location = new Point(82, 68);
+            txtPublisher.Name = "txtPublisher";
+            txtPublisher.Size = new Size(105, 23);
+            txtPublisher.TabIndex = 1;
             // 
             // label5
             // 
@@ -166,12 +166,12 @@
             label3.TabIndex = 0;
             label3.Text = "Author:";
             // 
-            // textBox1
+            // txtBookName
             // 
-            textBox1.Location = new Point(82, 26);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(105, 23);
-            textBox1.TabIndex = 1;
+            txtBookName.Location = new Point(82, 26);
+            txtBookName.Name = "txtBookName";
+            txtBookName.Size = new Size(105, 23);
+            txtBookName.TabIndex = 1;
             // 
             // label2
             // 
@@ -211,10 +211,10 @@
             Text = "MainForm";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)listBook).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtBookQuantity).EndInit();
             ResumeLayout(false);
         }
 
@@ -223,18 +223,18 @@
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private DataGridView dataGridView1;
+        private DataGridView listBook;
         private GroupBox groupBox1;
-        private TextBox textBox3;
-        private TextBox textBox2;
+        private TextBox txtAuthor;
+        private TextBox txtPublisher;
         private Label label3;
-        private TextBox textBox1;
+        private TextBox txtBookName;
         private Label label2;
         private Label label1;
-        private Button button1;
-        private TextBox textBox4;
+        private Button AddBook;
+        private TextBox txtPublishYear;
         private Label label4;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown txtBookQuantity;
         private Label label5;
     }
 }
