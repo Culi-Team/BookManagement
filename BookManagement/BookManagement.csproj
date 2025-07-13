@@ -10,9 +10,11 @@
 
   <ItemGroup>
     <Folder Include="2.Controls\" />
-    <Folder Include="3.Models\" />
-    <Folder Include="4.Helpers\" />
     <Folder Include="5.Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>
