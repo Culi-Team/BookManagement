@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             tabControl1 = new TabControl();
-            tabPage1 = new TabPage();
+            BookManagePage = new TabPage();
             listBook = new DataGridView();
             groupBox1 = new GroupBox();
             txtBookQuantity = new NumericUpDown();
@@ -45,35 +46,58 @@
             txtBookName = new TextBox();
             label2 = new Label();
             label1 = new Label();
-            tabPage2 = new TabPage();
+            ReaderManagePage = new TabPage();
+            listReader = new DataGridView();
+            groupBox2 = new GroupBox();
+            btnUpdateReader = new Button();
+            btnRemoveReader = new Button();
+            btnAddReader = new Button();
+            txtReaderPhone = new TextBox();
+            txtReaderEmail = new TextBox();
+            label6 = new Label();
+            txtReaderName = new TextBox();
+            label9 = new Label();
+            label10 = new Label();
+            groupBox3 = new GroupBox();
+            btnSearch = new Button();
+            textBox2 = new TextBox();
+            label7 = new Label();
+            BorrowManagePage = new TabPage();
+            bindingSource1 = new BindingSource(components);
             tabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
+            BookManagePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)listBook).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtBookQuantity).BeginInit();
+            ReaderManagePage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)listReader).BeginInit();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
             // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(BorrowManagePage);
+            tabControl1.Controls.Add(BookManagePage);
+            tabControl1.Controls.Add(ReaderManagePage);
             tabControl1.Location = new Point(1, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(881, 541);
+            tabControl1.Size = new Size(883, 538);
             tabControl1.TabIndex = 0;
             // 
-            // tabPage1
+            // BookManagePage
             // 
-            tabPage1.Controls.Add(listBook);
-            tabPage1.Controls.Add(groupBox1);
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(873, 513);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Book Manager";
-            tabPage1.UseVisualStyleBackColor = true;
+            BookManagePage.Controls.Add(listBook);
+            BookManagePage.Controls.Add(groupBox1);
+            BookManagePage.Location = new Point(4, 24);
+            BookManagePage.Name = "BookManagePage";
+            BookManagePage.Padding = new Padding(3);
+            BookManagePage.Size = new Size(875, 510);
+            BookManagePage.TabIndex = 0;
+            BookManagePage.Text = "Book Manager";
+            BookManagePage.UseVisualStyleBackColor = true;
             // 
             // listBook
             // 
@@ -129,9 +153,9 @@
             Update.Name = "Update";
             Update.Size = new Size(88, 43);
             Update.TabIndex = 2;
-            Update.Text = "Update";
+            Update.Text = "Update Book";
             Update.UseVisualStyleBackColor = true;
-            Update.Click += Update_Click;
+            Update.Click += UpdateBook_Click;
             // 
             // AddBook
             // 
@@ -216,15 +240,171 @@
             label1.TabIndex = 0;
             label1.Text = "Book name:";
             // 
-            // tabPage2
+            // ReaderManagePage
             // 
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(873, 513);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Reader Manager";
-            tabPage2.UseVisualStyleBackColor = true;
+            ReaderManagePage.Controls.Add(listReader);
+            ReaderManagePage.Controls.Add(groupBox2);
+            ReaderManagePage.Controls.Add(groupBox3);
+            ReaderManagePage.Location = new Point(4, 24);
+            ReaderManagePage.Name = "ReaderManagePage";
+            ReaderManagePage.Padding = new Padding(3);
+            ReaderManagePage.Size = new Size(875, 510);
+            ReaderManagePage.TabIndex = 1;
+            ReaderManagePage.Text = "Reader Manager";
+            ReaderManagePage.UseVisualStyleBackColor = true;
+            // 
+            // listReader
+            // 
+            listReader.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            listReader.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            listReader.Location = new Point(39, 154);
+            listReader.Name = "listReader";
+            listReader.Size = new Size(803, 341);
+            listReader.TabIndex = 3;
+            listReader.CellMouseClick += listReader_CellMouseClick;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(btnUpdateReader);
+            groupBox2.Controls.Add(btnRemoveReader);
+            groupBox2.Controls.Add(btnAddReader);
+            groupBox2.Controls.Add(txtReaderPhone);
+            groupBox2.Controls.Add(txtReaderEmail);
+            groupBox2.Controls.Add(label6);
+            groupBox2.Controls.Add(txtReaderName);
+            groupBox2.Controls.Add(label9);
+            groupBox2.Controls.Add(label10);
+            groupBox2.Location = new Point(15, 10);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(844, 73);
+            groupBox2.TabIndex = 2;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Reader Information";
+            // 
+            // btnUpdateReader
+            // 
+            btnUpdateReader.Location = new Point(552, 18);
+            btnUpdateReader.Name = "btnUpdateReader";
+            btnUpdateReader.Size = new Size(88, 43);
+            btnUpdateReader.TabIndex = 2;
+            btnUpdateReader.Text = "Update Reader";
+            btnUpdateReader.UseVisualStyleBackColor = true;
+            btnUpdateReader.Click += btnUpdateReader_Click;
+            // 
+            // btnRemoveReader
+            // 
+            btnRemoveReader.Location = new Point(740, 18);
+            btnRemoveReader.Name = "btnRemoveReader";
+            btnRemoveReader.Size = new Size(88, 43);
+            btnRemoveReader.TabIndex = 2;
+            btnRemoveReader.Text = "Remove Reader";
+            btnRemoveReader.UseVisualStyleBackColor = true;
+            btnRemoveReader.Click += btnRemoveReader_Click;
+            // 
+            // btnAddReader
+            // 
+            btnAddReader.Location = new Point(646, 18);
+            btnAddReader.Name = "btnAddReader";
+            btnAddReader.Size = new Size(88, 43);
+            btnAddReader.TabIndex = 2;
+            btnAddReader.Text = "Add Reader";
+            btnAddReader.UseVisualStyleBackColor = true;
+            btnAddReader.Click += btnAddReader_Click;
+            // 
+            // txtReaderPhone
+            // 
+            txtReaderPhone.Location = new Point(437, 29);
+            txtReaderPhone.Name = "txtReaderPhone";
+            txtReaderPhone.Size = new Size(105, 23);
+            txtReaderPhone.TabIndex = 1;
+            // 
+            // txtReaderEmail
+            // 
+            txtReaderEmail.Location = new Point(247, 26);
+            txtReaderEmail.Name = "txtReaderEmail";
+            txtReaderEmail.Size = new Size(105, 23);
+            txtReaderEmail.TabIndex = 1;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(385, 32);
+            label6.Name = "label6";
+            label6.Size = new Size(44, 15);
+            label6.TabIndex = 0;
+            label6.Text = "Phone:";
+            // 
+            // txtReaderName
+            // 
+            txtReaderName.Location = new Point(58, 26);
+            txtReaderName.Name = "txtReaderName";
+            txtReaderName.Size = new Size(105, 23);
+            txtReaderName.TabIndex = 1;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(195, 29);
+            label9.Name = "label9";
+            label9.Size = new Size(39, 15);
+            label9.TabIndex = 0;
+            label9.Text = "Email:";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(6, 29);
+            label10.Name = "label10";
+            label10.Size = new Size(42, 15);
+            label10.TabIndex = 0;
+            label10.Text = "Name:";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(btnSearch);
+            groupBox3.Controls.Add(textBox2);
+            groupBox3.Controls.Add(label7);
+            groupBox3.Location = new Point(15, 88);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(844, 419);
+            groupBox3.TabIndex = 5;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Reader Manager";
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(739, 23);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(88, 31);
+            btnSearch.TabIndex = 2;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(76, 28);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(657, 23);
+            textBox2.TabIndex = 1;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(24, 31);
+            label7.Name = "label7";
+            label7.Size = new Size(45, 15);
+            label7.TabIndex = 0;
+            label7.Text = "Search:";
+            // 
+            // BorrowManagePage
+            // 
+            BorrowManagePage.Location = new Point(4, 24);
+            BorrowManagePage.Name = "BorrowManagePage";
+            BorrowManagePage.Padding = new Padding(3);
+            BorrowManagePage.Size = new Size(875, 510);
+            BorrowManagePage.TabIndex = 2;
+            BorrowManagePage.Text = "Borrow Managerment";
+            BorrowManagePage.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -235,19 +415,26 @@
             Name = "MainForm";
             Text = "MainForm";
             tabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
+            BookManagePage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)listBook).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)txtBookQuantity).EndInit();
+            ReaderManagePage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)listReader).EndInit();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private TabControl tabControl1;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
+        private TabPage BookManagePage;
+        private TabPage ReaderManagePage;
         private DataGridView listBook;
         private GroupBox groupBox1;
         private TextBox txtAuthor;
@@ -263,5 +450,23 @@
         private Label label5;
         private Button RemoveBook;
         private Button Update;
+        private DataGridView listReader;
+        private GroupBox groupBox2;
+        private Button btnAddReader;
+        private TextBox txtReaderEmail;
+        private Label label8;
+        private TextBox txtReaderName;
+        private Label label9;
+        private Label label10;
+        private TabPage BorrowManagePage;
+        private TextBox txtReaderPhone;
+        private Label label6;
+        private GroupBox groupBox3;
+        private Button btnSearch;
+        private TextBox textBox2;
+        private Label label7;
+        private BindingSource bindingSource1;
+        private Button btnUpdateReader;
+        private Button btnRemoveReader;
     }
 }

@@ -9,7 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="1.Forms\UIControl\" />
+    <Compile Remove="1.Forms\UIControl\**" />
+    <EmbeddedResource Remove="1.Forms\UIControl\**" />
+    <None Remove="1.Forms\UIControl\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="2.Controls\" />
     <Folder Include="5.Resources\" />
   </ItemGroup>
