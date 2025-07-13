@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BookManagement._3.Models
 {
-    public class Book
+    public class Book : IEntity
     {
-        public int BookID { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
         public string Publisher { get; set; }

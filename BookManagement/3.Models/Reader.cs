@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace BookManagement._3.Models
 {
-    public class Reader
+    public class Reader : IEntity
     {
-        public int ReaderID { get; set; }
+
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
