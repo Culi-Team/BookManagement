@@ -20,7 +20,8 @@ namespace BookManagement._1.Forms
         private JsonRepository<Book> _bookRepo = new JsonRepository<Book>(AppPaths.BooksFile);
         private JsonRepository<Reader> _readerRepo = new JsonRepository<Reader>(AppPaths.ReadersFile);
         private JsonRepository<Borrowing> _borrowRepo = new JsonRepository<Borrowing>(AppPaths.BorrowingsFile);
-
+        private int bookIdBrow;
+        private int readerIdBrow;
         public MainForm()
         {
             InitializeComponent();
@@ -66,9 +67,9 @@ namespace BookManagement._1.Forms
             listBorrow.Columns["BorrowDate"].HeaderText = "Ngày mượn";
             listBorrow.Columns["DueDate"].HeaderText = "Số ngày mượn";
             listBorrow.Columns["ReturnDate"].HeaderText = "Ngày trả";
-
+            listBorrow.Columns["ReturnDate"].HeaderText = "Ngày Trả";
+            listBorrow.Columns["QualityBrrow"].HeaderText = "Số Lượng";
         }
-
         private void AddBook_Click(object sender, EventArgs e)
         {
             var newBook = new Book
@@ -165,25 +166,44 @@ namespace BookManagement._1.Forms
             LoadReaderToGrid();
         }
 
-        public void BorrowBook(int bookId, int readerId, DateTime borrowDate, DateTime returnDate)
+        public void BorrowBook(int bookId, int readerId, int quantityBorrow, DateTime borrowDate, DateTime dueDate)
         {
+            // Tìm sách
             var book = _bookRepo.GetItemFromId(bookId);
-
-            if (book == null || book.Quantity <= 0)
+            if (book == null)
             {
-                MessageBox.Show("Sách không khả dụng.");
+                MessageBox.Show("Không tìm thấy sách.");
                 return;
             }
 
+            if (quantityBorrow <= 0)
+            {
+                MessageBox.Show("Số lượng mượn phải lớn hơn 0.");
+                return;
+            }
 
+            if (quantityBorrow > book.Quantity)
+            {
+                MessageBox.Show("Số lượng sách không đủ.");
+                return;
+            }
+
+            // Tạo bản ghi mượn
             _borrowRepo.Add(new Borrowing
             {
                 BookID = bookId,
                 ReaderID = readerId,
                 BorrowDate = borrowDate,
-                ReturnDate = returnDate
+                DueDate = dueDate,
+                ReturnDate = null, // Chưa trả
+                QualityBrrow = quantityBorrow
             });
 
+            // Giảm số lượng sách tồn kho
+            book.Quantity -= quantityBorrow;
+            _bookRepo.Update(book);
+
+            MessageBox.Show("Mượn sách thành công.");
         }
 
         private void btnBookSelect_Click(object sender, EventArgs e)
@@ -193,6 +213,7 @@ namespace BookManagement._1.Forms
             if (bookListPopupForm.ShowDialog() == DialogResult.OK)
             {
                 txtBorrowBook.Text = bookListPopupForm.SelectedBook.Title;
+                bookIdBrow = bookListPopupForm.SelectedBook.Id;
             }
         }
 
@@ -203,12 +224,55 @@ namespace BookManagement._1.Forms
             if (readerListPopupForm.ShowDialog() == DialogResult.OK)
             {
                 txtReader.Text = readerListPopupForm.SelectedReader.Name;
+                readerIdBrow = readerListPopupForm.SelectedReader.Id;
             }
         }
+        public void ReturnBook(int borrowingId)
+        {
+            // Tìm bản ghi mượn
+            var borrowing = _borrowRepo.GetItemFromId(borrowingId);
+            if (borrowing == null)
+            {
+                MessageBox.Show("Không tìm thấy phiếu mượn.");
+                return;
+            }
 
+            // Kiểm tra đã trả chưa
+            if (borrowing.ReturnDate.HasValue)
+            {
+                MessageBox.Show("Phiếu mượn này đã được trả trước đó.");
+                return;
+            }
+
+            // Cập nhật ngày trả
+            borrowing.ReturnDate = DateTime.Now;
+
+            // Tăng lại số lượng sách tồn kho
+            var book = _bookRepo.GetItemFromId(borrowing.BookID);
+            if (book != null)
+            {
+                book.Quantity += borrowing.QualityBrrow;
+                _bookRepo.Update(book);
+            }
+
+            // Cập nhật phiếu mượn
+            _borrowRepo.Update(borrowing);
+
+            MessageBox.Show("Trả sách thành công.");
+        }
         private void btnBorrow_Click(object sender, EventArgs e)
         {
+            BorrowBook(bookIdBrow, readerIdBrow, int.Parse(txtQualityBrow.Text), datePckrBorrowDate.Value, datePckrDueDate.Value);
+            LoadBorrowToGrid();
+            LoadBooksToGrid();
+        }
 
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            var selectedBrow = (Borrowing)listBorrow.CurrentRow.DataBoundItem;
+            ReturnBook(selectedBrow.Id);
+            LoadBorrowToGrid();
+            LoadBooksToGrid();
         }
     }
 }

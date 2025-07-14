@@ -33,7 +33,9 @@
             BorrowManagePage = new TabPage();
             listBorrow = new DataGridView();
             groupBox4 = new GroupBox();
-            datePckrReturnDate = new DateTimePicker();
+            txtQualityBrow = new TextBox();
+            label15 = new Label();
+            datePckrDueDate = new DateTimePicker();
             datePckrBorrowDate = new DateTimePicker();
             btnReturn = new Button();
             btnBookSelect = new Button();
@@ -130,7 +132,9 @@
             // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(datePckrReturnDate);
+            groupBox4.Controls.Add(txtQualityBrow);
+            groupBox4.Controls.Add(label15);
+            groupBox4.Controls.Add(datePckrDueDate);
             groupBox4.Controls.Add(datePckrBorrowDate);
             groupBox4.Controls.Add(btnReturn);
             groupBox4.Controls.Add(btnBookSelect);
@@ -148,12 +152,28 @@
             groupBox4.TabStop = false;
             groupBox4.Text = "Quản lí mượn sách";
             // 
-            // datePckrReturnDate
+            // txtQualityBrow
             // 
-            datePckrReturnDate.Location = new Point(604, 52);
-            datePckrReturnDate.Name = "datePckrReturnDate";
-            datePckrReturnDate.Size = new Size(200, 23);
-            datePckrReturnDate.TabIndex = 10;
+            txtQualityBrow.Location = new Point(98, 70);
+            txtQualityBrow.Name = "txtQualityBrow";
+            txtQualityBrow.Size = new Size(105, 23);
+            txtQualityBrow.TabIndex = 12;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(23, 73);
+            label15.Name = "label15";
+            label15.Size = new Size(57, 15);
+            label15.TabIndex = 11;
+            label15.Text = "Số lượng:";
+            // 
+            // datePckrDueDate
+            // 
+            datePckrDueDate.Location = new Point(604, 52);
+            datePckrDueDate.Name = "datePckrDueDate";
+            datePckrDueDate.Size = new Size(200, 23);
+            datePckrDueDate.TabIndex = 10;
             // 
             // datePckrBorrowDate
             // 
@@ -170,6 +190,7 @@
             btnReturn.TabIndex = 9;
             btnReturn.Text = "Trả sách";
             btnReturn.UseVisualStyleBackColor = true;
+            btnReturn.Click += btnReturn_Click;
             // 
             // btnBookSelect
             // 
@@ -196,9 +217,9 @@
             label12.AutoSize = true;
             label12.Location = new Point(538, 55);
             label12.Name = "label12";
-            label12.Size = new Size(55, 15);
+            label12.Size = new Size(49, 15);
             label12.TabIndex = 5;
-            label12.Text = "Ngày trả:";
+            label12.Text = "Hạn trả:";
             // 
             // txtBorrowBook
             // 
@@ -332,7 +353,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(215, 72);
             label4.Name = "label4";
-            label4.Size = new Size(85, 15);
+            label4.Size = new Size(84, 15);
             label4.TabIndex = 0;
             label4.Text = "Năm xuất bản:";
             // 
@@ -357,7 +378,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(254, 29);
             label3.Name = "label3";
-            label3.Size = new Size(46, 15);
+            label3.Size = new Size(47, 15);
             label3.TabIndex = 0;
             label3.Text = "Tác giả:";
             // 
@@ -373,7 +394,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(7, 71);
             label2.Name = "label2";
-            label2.Size = new Size(81, 15);
+            label2.Size = new Size(80, 15);
             label2.TabIndex = 0;
             label2.Text = "Nhà xuất bản:";
             // 
@@ -382,7 +403,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(33, 29);
             label1.Name = "label1";
-            label1.Size = new Size(55, 15);
+            label1.Size = new Size(56, 15);
             label1.TabIndex = 0;
             label1.Text = "Tên sách:";
             // 
@@ -420,7 +441,7 @@
             label14.AutoSize = true;
             label14.Location = new Point(13, 28);
             label14.Name = "label14";
-            label14.Size = new Size(57, 15);
+            label14.Size = new Size(58, 15);
             label14.TabIndex = 3;
             label14.Text = "Tìm sách:";
             // 
@@ -523,7 +544,7 @@
             label6.AutoSize = true;
             label6.Location = new Point(393, 32);
             label6.Name = "label6";
-            label6.Size = new Size(30, 15);
+            label6.Size = new Size(31, 15);
             label6.TabIndex = 0;
             label6.Text = "SĐT:";
             // 
@@ -548,7 +569,7 @@
             label10.AutoSize = true;
             label10.Location = new Point(16, 29);
             label10.Name = "label10";
-            label10.Size = new Size(28, 15);
+            label10.Size = new Size(29, 15);
             label10.TabIndex = 0;
             label10.Text = "Tên:";
             // 
@@ -585,7 +606,7 @@
             label7.AutoSize = true;
             label7.Location = new Point(13, 31);
             label7.Name = "label7";
-            label7.Size = new Size(72, 15);
+            label7.Size = new Size(73, 15);
             label7.TabIndex = 0;
             label7.Text = "Tìm độc giả:";
             // 
@@ -660,7 +681,7 @@
         private GroupBox groupBox4;
         private Button btnReturn;
         private Button btnBorrow;
-        private DateTimePicker datePckrReturnDate;
+        private DateTimePicker datePckrDueDate;
         private DateTimePicker datePckrBorrowDate;
         private Label label12;
         private TextBox txtReader;
@@ -673,5 +694,7 @@
         private Button button4;
         private TextBox textBox4;
         private Label label14;
+        private TextBox txtQualityBrow;
+        private Label label15;
     }
 }
