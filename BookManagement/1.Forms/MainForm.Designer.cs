@@ -63,7 +63,7 @@
             label1 = new Label();
             groupBox5 = new GroupBox();
             button4 = new Button();
-            textBox4 = new TextBox();
+            txtBookSearch = new TextBox();
             label14 = new Label();
             listBook = new DataGridView();
             ReaderManagePage = new TabPage();
@@ -80,7 +80,7 @@
             label10 = new Label();
             groupBox3 = new GroupBox();
             btnSearch = new Button();
-            textBox2 = new TextBox();
+            txtReaderSearch = new TextBox();
             label7 = new Label();
             bindingSource1 = new BindingSource(components);
             tabControl1.SuspendLayout();
@@ -353,7 +353,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(215, 72);
             label4.Name = "label4";
-            label4.Size = new Size(84, 15);
+            label4.Size = new Size(85, 15);
             label4.TabIndex = 0;
             label4.Text = "Năm xuất bản:";
             // 
@@ -378,7 +378,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(254, 29);
             label3.Name = "label3";
-            label3.Size = new Size(47, 15);
+            label3.Size = new Size(46, 15);
             label3.TabIndex = 0;
             label3.Text = "Tác giả:";
             // 
@@ -394,7 +394,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(7, 71);
             label2.Name = "label2";
-            label2.Size = new Size(80, 15);
+            label2.Size = new Size(81, 15);
             label2.TabIndex = 0;
             label2.Text = "Nhà xuất bản:";
             // 
@@ -403,14 +403,14 @@
             label1.AutoSize = true;
             label1.Location = new Point(33, 29);
             label1.Name = "label1";
-            label1.Size = new Size(56, 15);
+            label1.Size = new Size(55, 15);
             label1.TabIndex = 0;
             label1.Text = "Tên sách:";
             // 
             // groupBox5
             // 
             groupBox5.Controls.Add(button4);
-            groupBox5.Controls.Add(textBox4);
+            groupBox5.Controls.Add(txtBookSearch);
             groupBox5.Controls.Add(label14);
             groupBox5.Controls.Add(listBook);
             groupBox5.Location = new Point(19, 125);
@@ -429,19 +429,20 @@
             button4.Text = "Tìm kiếm";
             button4.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // txtBookSearch
             // 
-            textBox4.Location = new Point(76, 25);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(657, 23);
-            textBox4.TabIndex = 4;
+            txtBookSearch.Location = new Point(76, 25);
+            txtBookSearch.Name = "txtBookSearch";
+            txtBookSearch.Size = new Size(657, 23);
+            txtBookSearch.TabIndex = 4;
+            txtBookSearch.TextChanged += txtBookSearch_TextChanged;
             // 
             // label14
             // 
             label14.AutoSize = true;
             label14.Location = new Point(13, 28);
             label14.Name = "label14";
-            label14.Size = new Size(58, 15);
+            label14.Size = new Size(57, 15);
             label14.TabIndex = 3;
             label14.Text = "Tìm sách:";
             // 
@@ -544,7 +545,7 @@
             label6.AutoSize = true;
             label6.Location = new Point(393, 32);
             label6.Name = "label6";
-            label6.Size = new Size(31, 15);
+            label6.Size = new Size(30, 15);
             label6.TabIndex = 0;
             label6.Text = "SĐT:";
             // 
@@ -569,14 +570,14 @@
             label10.AutoSize = true;
             label10.Location = new Point(16, 29);
             label10.Name = "label10";
-            label10.Size = new Size(29, 15);
+            label10.Size = new Size(28, 15);
             label10.TabIndex = 0;
             label10.Text = "Tên:";
             // 
             // groupBox3
             // 
             groupBox3.Controls.Add(btnSearch);
-            groupBox3.Controls.Add(textBox2);
+            groupBox3.Controls.Add(txtReaderSearch);
             groupBox3.Controls.Add(label7);
             groupBox3.Location = new Point(15, 88);
             groupBox3.Name = "groupBox3";
@@ -594,19 +595,20 @@
             btnSearch.Text = "Tìm kiếm";
             btnSearch.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // txtReaderSearch
             // 
-            textBox2.Location = new Point(88, 28);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(645, 23);
-            textBox2.TabIndex = 1;
+            txtReaderSearch.Location = new Point(88, 28);
+            txtReaderSearch.Name = "txtReaderSearch";
+            txtReaderSearch.Size = new Size(645, 23);
+            txtReaderSearch.TabIndex = 1;
+            txtReaderSearch.TextChanged += txtReaderSearch_TextChanged;
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Location = new Point(13, 31);
             label7.Name = "label7";
-            label7.Size = new Size(73, 15);
+            label7.Size = new Size(72, 15);
             label7.TabIndex = 0;
             label7.Text = "Tìm độc giả:";
             // 
@@ -673,7 +675,7 @@
         private Label label6;
         private GroupBox groupBox3;
         private Button btnSearch;
-        private TextBox textBox2;
+        private TextBox txtReaderSearch;
         private Label label7;
         private BindingSource bindingSource1;
         private Button btnUpdateReader;
@@ -692,7 +694,7 @@
         private Label label13;
         private GroupBox groupBox5;
         private Button button4;
-        private TextBox textBox4;
+        private TextBox txtBookSearch;
         private Label label14;
         private TextBox txtQualityBrow;
         private Label label15;

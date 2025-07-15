@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,6 +42,7 @@ namespace BookManagement._2.Controls
         {
             var items = Load();
             var index = items.FindIndex(x => x.Id == item.Id);
+
             if (index >= 0)
             {
                 items[index] = item;
@@ -49,6 +52,24 @@ namespace BookManagement._2.Controls
             {
                 throw new Exception("Không tìm thấy bản ghi để cập nhật.");
             }
+        }
+
+        public List<T> Find(string keyword)
+        {
+            var items = Load();
+
+            var property = typeof(T).GetProperty("Title") ?? typeof(T).GetProperty("Name");
+             
+            if (property == null || property.PropertyType != typeof(string))
+                throw new Exception("Không tìm thấy thuộc tính 'Title' hoặc 'Name' kiểu string để tìm kiếm.");
+
+            var listFind = items.Where(x =>
+            {
+                var value = property.GetValue(x) as string;
+                return !string.IsNullOrEmpty(value) && value.Contains(keyword, StringComparison.OrdinalIgnoreCase);
+            }).ToList();
+
+            return listFind;
         }
 
         public void Delete(int id)

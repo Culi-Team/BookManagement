@@ -25,14 +25,12 @@ namespace BookManagement._1.Forms
         public MainForm()
         {
             InitializeComponent();
-            LoadBooksToGrid();
-            LoadReaderToGrid();
+            LoadBooksToGrid(_bookRepo.Load());
+            LoadReaderToGrid(_readerRepo.Load());
             LoadBorrowToGrid();
         }
-        private void LoadBooksToGrid()
+        private void LoadBooksToGrid(List<Book> books)
         {
-            var books = _bookRepo.Load();
-
             listBook.DataSource = books;
 
             listBook.Columns["Id"].HeaderText = "Mã Sách";
@@ -42,10 +40,8 @@ namespace BookManagement._1.Forms
             listBook.Columns["Year"].HeaderText = "Năm";
             listBook.Columns["Quantity"].HeaderText = "Số Lượng";
         }
-        private void LoadReaderToGrid()
+        private void LoadReaderToGrid(List<Reader> readers)
         {
-            var readers = _readerRepo.Load();
-
             listReader.DataSource = readers;
 
             listReader.Columns["Id"].HeaderText = "ID người mượn";
@@ -114,7 +110,7 @@ namespace BookManagement._1.Forms
                 Quantity = int.Parse(txtBookQuantity.Text),
             };
             _bookRepo.Add(newBook);
-            LoadBooksToGrid();
+            LoadBooksToGrid(_bookRepo.Load());
         }
 
         private void UpdateBook_Click(object sender, EventArgs e)
@@ -132,7 +128,7 @@ namespace BookManagement._1.Forms
             };
 
             _bookRepo.Update(updateBook);
-            LoadBooksToGrid();
+            LoadBooksToGrid(_bookRepo.Load());
         }
 
         private void RemoveBook_Click(object sender, EventArgs e)
@@ -140,7 +136,7 @@ namespace BookManagement._1.Forms
             var selectedBook = (Book)listBook.CurrentRow.DataBoundItem;
 
             _bookRepo.Delete(selectedBook.Id);
-            LoadBooksToGrid();
+            LoadBooksToGrid(_bookRepo.Load());
         }
 
         private void listBook_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -163,7 +159,7 @@ namespace BookManagement._1.Forms
                 Phone = txtReaderPhone.Text,
             };
             _readerRepo.Add(newReader);
-            LoadReaderToGrid();
+            LoadReaderToGrid(_readerRepo.Load());
         }
 
         private void btnUpdateReader_Click(object sender, EventArgs e)
@@ -179,7 +175,7 @@ namespace BookManagement._1.Forms
             };
 
             _readerRepo.Update(updateReader);
-            LoadReaderToGrid();
+            LoadReaderToGrid(_readerRepo.Load());
         }
 
         private void listReader_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -196,7 +192,7 @@ namespace BookManagement._1.Forms
             var selectedReader = (Reader)listReader.CurrentRow.DataBoundItem;
 
             _readerRepo.Delete(selectedReader.Id);
-            LoadReaderToGrid();
+            LoadReaderToGrid(_readerRepo.Load());
         }
 
         public void BorrowBook(int bookId, int readerId, int quantityBorrow, DateTime borrowDate, DateTime dueDate)
@@ -297,7 +293,7 @@ namespace BookManagement._1.Forms
         {
             BorrowBook(bookIdBrow, readerIdBrow, int.Parse(txtQualityBrow.Text), datePckrBorrowDate.Value, datePckrDueDate.Value);
             LoadBorrowToGrid();
-            LoadBooksToGrid();
+            LoadBooksToGrid(_bookRepo.Load());
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -305,7 +301,23 @@ namespace BookManagement._1.Forms
             var selectedBrow = (BorrowingViewModel)listBorrow.CurrentRow.DataBoundItem;
             ReturnBook(selectedBrow.Id);
             LoadBorrowToGrid();
-            LoadBooksToGrid();
+            LoadBooksToGrid(_bookRepo.Load());
+        }
+
+        private void txtBookSearch_TextChanged(object sender, EventArgs e)
+        {
+            List<Book> bookFindList = new List<Book>();
+
+            bookFindList = _bookRepo.Find(txtBookSearch.Text);
+            LoadBooksToGrid(bookFindList);
+        }
+
+        private void txtReaderSearch_TextChanged(object sender, EventArgs e)
+        {
+            List<Reader> readerFindList = new List<Reader>();
+
+            readerFindList = _readerRepo.Find(txtReaderSearch.Text);
+            LoadReaderToGrid(readerFindList);
         }
     }
 }
