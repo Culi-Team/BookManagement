@@ -55,7 +55,7 @@ namespace BookManagement._1.Forms
 
         }
 
-        private void LoadBorrowToGrid()
+        /*private void LoadBorrowToGrid()
         {
             var borrows = _borrowRepo.Load();
 
@@ -69,6 +69,39 @@ namespace BookManagement._1.Forms
             listBorrow.Columns["ReturnDate"].HeaderText = "Ngày trả";
             listBorrow.Columns["ReturnDate"].HeaderText = "Ngày Trả";
             listBorrow.Columns["QualityBrrow"].HeaderText = "Số Lượng";
+        }*/
+        private void LoadBorrowToGrid()
+        {
+            // Lấy dữ liệu gốc
+            var borrows = _borrowRepo.Load();
+            var books = _bookRepo.Load();
+            var readers = _readerRepo.Load(); // Bạn cần có JsonRepository<Reader>
+
+            // Map thành danh sách ViewModel
+            var borrowViewModels = borrows
+                .OrderByDescending(b => b.BorrowDate)
+                .Select(b => new BorrowingViewModel
+                {
+                    Id = b.Id,
+                    BookTitle = books.FirstOrDefault(book => book.Id == b.BookID)?.Title ?? "(Không tìm thấy)",
+                    ReaderName = readers.FirstOrDefault(r => r.Id == b.ReaderID)?.Name ?? "(Không tìm thấy)",
+                    BorrowDate = b.BorrowDate.Date,
+                    DueDate = b.DueDate.Date,
+                    ReturnDate = b.ReturnDate != null ? b.ReturnDate.Value.Date : b.ReturnDate,
+                    QuantityBorrow = b.QualityBrrow
+                }).ToList();
+
+            // Gán DataSource
+            listBorrow.DataSource = borrowViewModels;
+
+            // Đặt header
+            listBorrow.Columns["Id"].HeaderText = "Mã Phiếu";
+            listBorrow.Columns["BookTitle"].HeaderText = "Tên Sách";
+            listBorrow.Columns["ReaderName"].HeaderText = "Độc Giả";
+            listBorrow.Columns["BorrowDate"].HeaderText = "Ngày Mượn";
+            listBorrow.Columns["DueDate"].HeaderText = "Hạn Trả";
+            listBorrow.Columns["ReturnDate"].HeaderText = "Ngày Trả";
+            listBorrow.Columns["QuantityBorrow"].HeaderText = "Số Lượng";
         }
         private void AddBook_Click(object sender, EventArgs e)
         {
@@ -269,7 +302,7 @@ namespace BookManagement._1.Forms
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            var selectedBrow = (Borrowing)listBorrow.CurrentRow.DataBoundItem;
+            var selectedBrow = (BorrowingViewModel)listBorrow.CurrentRow.DataBoundItem;
             ReturnBook(selectedBrow.Id);
             LoadBorrowToGrid();
             LoadBooksToGrid();
