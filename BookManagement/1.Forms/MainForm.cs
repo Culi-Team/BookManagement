@@ -2,6 +2,7 @@
 using BookManagement._3.Models;
 using BookManagement._4.Helpers;
 using BookManagement.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,9 @@ namespace BookManagement._1.Forms
 {
     public partial class MainForm : Form
     {
-        private JsonRepository<Book> _bookRepo = new JsonRepository<Book>(AppPaths.BooksFile);
-        private JsonRepository<Reader> _readerRepo = new JsonRepository<Reader>(AppPaths.ReadersFile);
-        private JsonRepository<Borrowing> _borrowRepo = new JsonRepository<Borrowing>(AppPaths.BorrowingsFile);
+        //private JsonRepository<Book> _bookRepo = new JsonRepository<Book>(AppPaths.BooksFile);
+        //private JsonRepository<Reader> _readerRepo = new JsonRepository<Reader>(AppPaths.ReadersFile);
+        //private JsonRepository<Borrowing> _borrowRepo = new JsonRepository<Borrowing>(AppPaths.BorrowingsFile);
         private IRepository<Book> _bookRepository = new Repository<Book>(Program.BookManagementDb);
         private IRepository<Reader> _readerRepository = new Repository<Reader>(Program.BookManagementDb);
         private IRepository<Borrowing> _borrowingRepository = new Repository<Borrowing>(Program.BookManagementDb);
@@ -115,7 +116,7 @@ namespace BookManagement._1.Forms
                 Year = int.Parse(txtPublishYear.Text),
                 Quantity = int.Parse(txtBookQuantity.Text),
             };
-            _bookRepo.Add(newBook);
+            _bookRepository.AddAsync(newBook);
             LoadBooksToGrid(_bookRepository.AsQueryable().ToList());
         }
 
@@ -123,17 +124,16 @@ namespace BookManagement._1.Forms
         {
             var selectedBook = (Book)listBook.CurrentRow.DataBoundItem;
 
-            var updateBook = new Book
+            var existBook = _bookRepository.AsQueryable().FirstOrDefault(x => x.Id == selectedBook.Id);
+            if(existBook != null)
             {
-                Id = selectedBook.Id,
-                Title = txtBookName.Text,
-                Author = txtAuthor.Text,
-                Publisher = txtPublisher.Text,
-                Year = int.Parse(txtPublishYear.Text),
-                Quantity = int.Parse(txtBookQuantity.Text),
-            };
+                existBook.Title = txtBookName.Text;
+                existBook.Publisher = txtPublisher.Text;
+                existBook.Author = txtAuthor.Text;
+                existBook.Year = int.Parse(txtPublishYear.Text);
+            }
 
-            _bookRepo.Update(updateBook);
+            _bookRepository.UpdateAsync(existBook);
             LoadBooksToGrid(_bookRepository.AsQueryable().ToList());
         }
 
@@ -141,7 +141,9 @@ namespace BookManagement._1.Forms
         {
             var selectedBook = (Book)listBook.CurrentRow.DataBoundItem;
 
-            _bookRepo.Delete(selectedBook.Id);
+            var deleteBook = _bookRepository.AsQueryable().FirstOrDefault(x => x.Id == selectedBook.Id);
+
+            _bookRepository.DeleteAsync(deleteBook);
             LoadBooksToGrid(_bookRepository.AsQueryable().ToList());
         }
 
@@ -173,15 +175,16 @@ namespace BookManagement._1.Forms
         {
             var selectedReader = (Reader)listReader.CurrentRow.DataBoundItem;
 
-            var updateReader = new Reader
-            {
-                Id = selectedReader.Id,
-                Name = txtReaderName.Text,
-                Email = txtReaderEmail.Text,
-                Phone = txtReaderPhone.Text,
-            };
+            var existReader = _readerRepository.AsQueryable().FirstOrDefault(x => x.Id == selectedReader.Id);
 
-            _readerRepository.UpdateAsync(updateReader);
+            if(existReader != null)
+            {
+                existReader.Name = txtReaderName.Text;
+                existReader.Email = txtReaderEmail.Text;
+                existReader.Phone = txtReaderPhone.Text;
+            }
+
+            _readerRepository.UpdateAsync(existReader);
             LoadReaderToGrid(_readerRepository.AsQueryable().ToList());
         }
 
@@ -205,7 +208,7 @@ namespace BookManagement._1.Forms
         public void BorrowBook(int bookId, int readerId, int quantityBorrow, DateTime borrowDate, DateTime dueDate)
         {
             // Tìm sách
-            var book = _bookRepo.GetItemFromId(bookId);
+            var book = _bookRepository.AsQueryable().FirstOrDefault(b => b.Id == bookId);
             if (book == null)
             {
                 MessageBox.Show("Không tìm thấy sách.");
@@ -225,7 +228,7 @@ namespace BookManagement._1.Forms
             }
 
             // Tạo bản ghi mượn
-            _borrowRepo.Add(new Borrowing
+            _borrowingRepository.AddAsync(new Borrowing
             {
                 BookID = bookId,
                 ReaderID = readerId,
@@ -237,7 +240,7 @@ namespace BookManagement._1.Forms
 
             // Giảm số lượng sách tồn kho
             book.Quantity -= quantityBorrow;
-            _bookRepo.Update(book);
+            _bookRepository.UpdateAsync(book);
 
             MessageBox.Show("Mượn sách thành công.");
         }
@@ -266,7 +269,7 @@ namespace BookManagement._1.Forms
         public void ReturnBook(int borrowingId)
         {
             // Tìm bản ghi mượn
-            var borrowing = _borrowRepo.GetItemFromId(borrowingId);
+            var borrowing = _borrowingRepository.AsQueryable().FirstOrDefault(x => x.Id == borrowingId);
             if (borrowing == null)
             {
                 MessageBox.Show("Không tìm thấy phiếu mượn.");
@@ -284,15 +287,15 @@ namespace BookManagement._1.Forms
             borrowing.ReturnDate = DateTime.Now;
 
             // Tăng lại số lượng sách tồn kho
-            var book = _bookRepo.GetItemFromId(borrowing.BookID);
+            var book = _bookRepository.AsQueryable().FirstOrDefault(x => x.Id == borrowing.BookID);
             if (book != null)
             {
                 book.Quantity += borrowing.QualityBrrow;
-                _bookRepo.Update(book);
+                _bookRepository.UpdateAsync(book);
             }
 
             // Cập nhật phiếu mượn
-            _borrowRepo.Update(borrowing);
+            _borrowingRepository.UpdateAsync(borrowing);
 
             MessageBox.Show("Trả sách thành công.");
         }
@@ -315,7 +318,7 @@ namespace BookManagement._1.Forms
         {
             List<Book> bookFindList = new List<Book>();
 
-            bookFindList = _bookRepo.Find(txtBookSearch.Text);
+            bookFindList = _bookRepository.AsQueryable().Where(b => b.Title.Contains(txtBookSearch.Text)).ToList();
             LoadBooksToGrid(bookFindList);
         }
 
@@ -323,7 +326,7 @@ namespace BookManagement._1.Forms
         {
             List<Reader> readerFindList = new List<Reader>();
 
-            readerFindList = _readerRepo.Find(txtReaderSearch.Text);
+            readerFindList = _readerRepository.AsQueryable().Where(r => r.Name.Contains(txtReaderSearch.Text)).ToList();
             LoadReaderToGrid(readerFindList);
         }
     }

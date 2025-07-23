@@ -15,7 +15,7 @@ namespace BookManagement
             var optionsBuilder = new DbContextOptionsBuilder<BookManagementDbContext>();
 
             //var connectionString = "server=192.168.1.27;database=BusinessTripDB;user=topv;password=1234";
-            var connectionString = "server=localhost;database=BookManagementDb;user=root;password=123456";
+            var connectionString = "server=localhost;database=BookManagementDb;user=root;password=1234";
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
             return new BookManagementDbContext(optionsBuilder.Options);

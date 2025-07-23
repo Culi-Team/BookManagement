@@ -1,6 +1,7 @@
 ﻿using BookManagement._2.Controls;
 using BookManagement._3.Models;
 using BookManagement._4.Helpers;
+using BookManagement.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,18 +17,18 @@ namespace BookManagement._1.Forms
     public partial class ReaderListPopupForm : Form
     {
         private JsonRepository<Reader> _readerRepo = new JsonRepository<Reader>(AppPaths.ReadersFile);
+        private IRepository<Reader> _readerRepository = new Repository<Reader>(Program.BookManagementDb);
+
         public Reader SelectedReader { get; set; }
 
         public ReaderListPopupForm()
         {
             InitializeComponent();
-            LoadReadersToGrid();
+            LoadReadersToGrid(_readerRepository.AsQueryable().ToList());
         }
 
-        private void LoadReadersToGrid()
+        private void LoadReadersToGrid(List<Reader> readers)
         {
-            var readers = _readerRepo.Load();
-
             listReader.DataSource = readers;
 
             listReader.Columns["Id"].HeaderText = "ID";
