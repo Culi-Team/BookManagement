@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             tabControl1 = new TabControl();
             BorrowManagePage = new TabPage();
             listBorrow = new DataGridView();
             groupBox4 = new GroupBox();
+            numericBorrowQuantity = new NumericUpDown();
             label15 = new Label();
             datePckrDueDate = new DateTimePicker();
             datePckrBorrowDate = new DateTimePicker();
@@ -82,11 +84,11 @@
             txtReaderSearch = new TextBox();
             label7 = new Label();
             bindingSource1 = new BindingSource(components);
-            numericBorrowQuantity = new NumericUpDown();
             tabControl1.SuspendLayout();
             BorrowManagePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)listBorrow).BeginInit();
             groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericBorrowQuantity).BeginInit();
             BookManagePage.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtBookQuantity).BeginInit();
@@ -97,7 +99,6 @@
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericBorrowQuantity).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -153,6 +154,13 @@
             groupBox4.TabStop = false;
             groupBox4.Text = "Quản lí mượn sách";
             // 
+            // numericBorrowQuantity
+            // 
+            numericBorrowQuantity.Location = new Point(98, 71);
+            numericBorrowQuantity.Name = "numericBorrowQuantity";
+            numericBorrowQuantity.Size = new Size(105, 23);
+            numericBorrowQuantity.TabIndex = 12;
+            // 
             // label15
             // 
             label15.AutoSize = true;
@@ -178,11 +186,16 @@
             // 
             // btnReturn
             // 
+            btnReturn.Image = (Image)resources.GetObject("btnReturn.Image");
+            btnReturn.ImageAlign = ContentAlignment.MiddleLeft;
             btnReturn.Location = new Point(433, 101);
             btnReturn.Name = "btnReturn";
+            btnReturn.Padding = new Padding(15, 0, 0, 0);
             btnReturn.Size = new Size(133, 43);
             btnReturn.TabIndex = 9;
             btnReturn.Text = "Trả sách";
+            btnReturn.TextAlign = ContentAlignment.MiddleLeft;
+            btnReturn.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnReturn.UseVisualStyleBackColor = true;
             btnReturn.Click += btnReturn_Click;
             // 
@@ -198,11 +211,16 @@
             // 
             // btnBorrow
             // 
+            btnBorrow.Image = (Image)resources.GetObject("btnBorrow.Image");
+            btnBorrow.ImageAlign = ContentAlignment.MiddleLeft;
             btnBorrow.Location = new Point(265, 101);
             btnBorrow.Name = "btnBorrow";
+            btnBorrow.Padding = new Padding(10, 0, 0, 0);
             btnBorrow.Size = new Size(133, 43);
             btnBorrow.TabIndex = 9;
             btnBorrow.Text = "Mượn sách";
+            btnBorrow.TextAlign = ContentAlignment.MiddleLeft;
+            btnBorrow.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnBorrow.UseVisualStyleBackColor = true;
             btnBorrow.Click += btnBorrow_Click;
             // 
@@ -293,51 +311,65 @@
             // 
             // txtBookQuantity
             // 
-            txtBookQuantity.Location = new Point(476, 49);
+            txtBookQuantity.Location = new Point(468, 49);
             txtBookQuantity.Name = "txtBookQuantity";
             txtBookQuantity.Size = new Size(65, 23);
             txtBookQuantity.TabIndex = 3;
             // 
             // RemoveBook
             // 
-            RemoveBook.Location = new Point(750, 37);
+            RemoveBook.Image = (Image)resources.GetObject("RemoveBook.Image");
+            RemoveBook.ImageAlign = ContentAlignment.MiddleLeft;
+            RemoveBook.Location = new Point(739, 37);
             RemoveBook.Name = "RemoveBook";
-            RemoveBook.Size = new Size(88, 43);
+            RemoveBook.Padding = new Padding(10, 0, 0, 0);
+            RemoveBook.Size = new Size(100, 43);
             RemoveBook.TabIndex = 2;
             RemoveBook.Text = "Xoá";
+            RemoveBook.TextAlign = ContentAlignment.MiddleLeft;
+            RemoveBook.TextImageRelation = TextImageRelation.ImageBeforeText;
             RemoveBook.UseVisualStyleBackColor = true;
             RemoveBook.Click += RemoveBook_Click;
             // 
             // Update
             // 
-            Update.Location = new Point(557, 37);
+            Update.Image = (Image)resources.GetObject("Update.Image");
+            Update.ImageAlign = ContentAlignment.MiddleLeft;
+            Update.Location = new Point(537, 37);
             Update.Name = "Update";
-            Update.Size = new Size(88, 43);
+            Update.Size = new Size(100, 43);
             Update.TabIndex = 2;
             Update.Text = "Cập nhật";
+            Update.TextAlign = ContentAlignment.MiddleLeft;
+            Update.TextImageRelation = TextImageRelation.ImageBeforeText;
             Update.UseVisualStyleBackColor = true;
             Update.Click += UpdateBook_Click;
             // 
             // AddBook
             // 
-            AddBook.Location = new Point(654, 37);
+            AddBook.Image = (Image)resources.GetObject("AddBook.Image");
+            AddBook.ImageAlign = ContentAlignment.MiddleLeft;
+            AddBook.Location = new Point(638, 37);
             AddBook.Name = "AddBook";
-            AddBook.Size = new Size(88, 43);
+            AddBook.Padding = new Padding(8, 0, 0, 0);
+            AddBook.Size = new Size(100, 43);
             AddBook.TabIndex = 2;
             AddBook.Text = "Thêm";
+            AddBook.TextAlign = ContentAlignment.MiddleLeft;
+            AddBook.TextImageRelation = TextImageRelation.ImageBeforeText;
             AddBook.UseVisualStyleBackColor = true;
             AddBook.Click += AddBook_Click;
             // 
             // txtPublishYear
             // 
-            txtPublishYear.Location = new Point(302, 69);
+            txtPublishYear.Location = new Point(292, 69);
             txtPublishYear.Name = "txtPublishYear";
             txtPublishYear.Size = new Size(105, 23);
             txtPublishYear.TabIndex = 1;
             // 
             // txtAuthor
             // 
-            txtAuthor.Location = new Point(302, 26);
+            txtAuthor.Location = new Point(292, 26);
             txtAuthor.Name = "txtAuthor";
             txtAuthor.Size = new Size(105, 23);
             txtAuthor.TabIndex = 1;
@@ -345,9 +377,9 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(215, 72);
+            label4.Location = new Point(205, 72);
             label4.Name = "label4";
-            label4.Size = new Size(84, 15);
+            label4.Size = new Size(85, 15);
             label4.TabIndex = 0;
             label4.Text = "Năm xuất bản:";
             // 
@@ -361,7 +393,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(417, 53);
+            label5.Location = new Point(404, 53);
             label5.Name = "label5";
             label5.Size = new Size(54, 15);
             label5.TabIndex = 0;
@@ -370,9 +402,9 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(254, 29);
+            label3.Location = new Point(244, 29);
             label3.Name = "label3";
-            label3.Size = new Size(47, 15);
+            label3.Size = new Size(46, 15);
             label3.TabIndex = 0;
             label3.Text = "Tác giả:";
             // 
@@ -388,7 +420,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(7, 71);
             label2.Name = "label2";
-            label2.Size = new Size(80, 15);
+            label2.Size = new Size(81, 15);
             label2.TabIndex = 0;
             label2.Text = "Nhà xuất bản:";
             // 
@@ -397,7 +429,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(33, 29);
             label1.Name = "label1";
-            label1.Size = new Size(56, 15);
+            label1.Size = new Size(55, 15);
             label1.TabIndex = 0;
             label1.Text = "Tên sách:";
             // 
@@ -436,7 +468,7 @@
             label14.AutoSize = true;
             label14.Location = new Point(13, 28);
             label14.Name = "label14";
-            label14.Size = new Size(58, 15);
+            label14.Size = new Size(57, 15);
             label14.TabIndex = 3;
             label14.Text = "Tìm sách:";
             // 
@@ -492,44 +524,58 @@
             // 
             // btnUpdateReader
             // 
-            btnUpdateReader.Location = new Point(552, 18);
+            btnUpdateReader.Image = (Image)resources.GetObject("btnUpdateReader.Image");
+            btnUpdateReader.ImageAlign = ContentAlignment.MiddleLeft;
+            btnUpdateReader.Location = new Point(534, 18);
             btnUpdateReader.Name = "btnUpdateReader";
-            btnUpdateReader.Size = new Size(88, 43);
+            btnUpdateReader.Size = new Size(100, 43);
             btnUpdateReader.TabIndex = 2;
             btnUpdateReader.Text = "Cập nhật";
+            btnUpdateReader.TextAlign = ContentAlignment.MiddleLeft;
+            btnUpdateReader.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnUpdateReader.UseVisualStyleBackColor = true;
             btnUpdateReader.Click += btnUpdateReader_Click;
             // 
             // btnRemoveReader
             // 
+            btnRemoveReader.Image = (Image)resources.GetObject("btnRemoveReader.Image");
+            btnRemoveReader.ImageAlign = ContentAlignment.MiddleLeft;
             btnRemoveReader.Location = new Point(740, 18);
             btnRemoveReader.Name = "btnRemoveReader";
-            btnRemoveReader.Size = new Size(88, 43);
+            btnRemoveReader.Padding = new Padding(10, 0, 0, 0);
+            btnRemoveReader.Size = new Size(100, 43);
             btnRemoveReader.TabIndex = 2;
             btnRemoveReader.Text = "Xoá";
+            btnRemoveReader.TextAlign = ContentAlignment.MiddleLeft;
+            btnRemoveReader.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnRemoveReader.UseVisualStyleBackColor = true;
             btnRemoveReader.Click += btnRemoveReader_Click;
             // 
             // btnAddReader
             // 
-            btnAddReader.Location = new Point(646, 18);
+            btnAddReader.Image = (Image)resources.GetObject("btnAddReader.Image");
+            btnAddReader.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAddReader.Location = new Point(637, 18);
             btnAddReader.Name = "btnAddReader";
-            btnAddReader.Size = new Size(88, 43);
+            btnAddReader.Padding = new Padding(8, 0, 0, 0);
+            btnAddReader.Size = new Size(100, 43);
             btnAddReader.TabIndex = 2;
             btnAddReader.Text = "Thêm";
+            btnAddReader.TextAlign = ContentAlignment.MiddleLeft;
+            btnAddReader.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnAddReader.UseVisualStyleBackColor = true;
             btnAddReader.Click += btnAddReader_Click;
             // 
             // txtReaderPhone
             // 
-            txtReaderPhone.Location = new Point(437, 29);
+            txtReaderPhone.Location = new Point(421, 28);
             txtReaderPhone.Name = "txtReaderPhone";
             txtReaderPhone.Size = new Size(105, 23);
             txtReaderPhone.TabIndex = 1;
             // 
             // txtReaderEmail
             // 
-            txtReaderEmail.Location = new Point(247, 26);
+            txtReaderEmail.Location = new Point(240, 26);
             txtReaderEmail.Name = "txtReaderEmail";
             txtReaderEmail.Size = new Size(105, 23);
             txtReaderEmail.TabIndex = 1;
@@ -537,15 +583,15 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(393, 32);
+            label6.Location = new Point(383, 32);
             label6.Name = "label6";
-            label6.Size = new Size(31, 15);
+            label6.Size = new Size(30, 15);
             label6.TabIndex = 0;
             label6.Text = "SĐT:";
             // 
             // txtReaderName
             // 
-            txtReaderName.Location = new Point(58, 26);
+            txtReaderName.Location = new Point(56, 26);
             txtReaderName.Name = "txtReaderName";
             txtReaderName.Size = new Size(105, 23);
             txtReaderName.TabIndex = 1;
@@ -553,7 +599,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(195, 29);
+            label9.Location = new Point(190, 29);
             label9.Name = "label9";
             label9.Size = new Size(39, 15);
             label9.TabIndex = 0;
@@ -564,7 +610,7 @@
             label10.AutoSize = true;
             label10.Location = new Point(16, 29);
             label10.Name = "label10";
-            label10.Size = new Size(29, 15);
+            label10.Size = new Size(28, 15);
             label10.TabIndex = 0;
             label10.Text = "Tên:";
             // 
@@ -602,16 +648,9 @@
             label7.AutoSize = true;
             label7.Location = new Point(13, 31);
             label7.Name = "label7";
-            label7.Size = new Size(73, 15);
+            label7.Size = new Size(72, 15);
             label7.TabIndex = 0;
             label7.Text = "Tìm độc giả:";
-            // 
-            // numericBorrowQuantity
-            // 
-            numericBorrowQuantity.Location = new Point(98, 71);
-            numericBorrowQuantity.Name = "numericBorrowQuantity";
-            numericBorrowQuantity.Size = new Size(105, 23);
-            numericBorrowQuantity.TabIndex = 12;
             // 
             // MainForm
             // 
@@ -619,6 +658,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(884, 537);
             Controls.Add(tabControl1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
             Text = "MainForm";
             tabControl1.ResumeLayout(false);
@@ -626,6 +666,7 @@
             ((System.ComponentModel.ISupportInitialize)listBorrow).EndInit();
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericBorrowQuantity).EndInit();
             BookManagePage.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -640,7 +681,6 @@
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericBorrowQuantity).EndInit();
             ResumeLayout(false);
         }
 
