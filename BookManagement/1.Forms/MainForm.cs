@@ -1,6 +1,7 @@
 ﻿using BookManagement._2.Controls;
 using BookManagement._3.Models;
 using BookManagement._4.Helpers;
+using BookManagement.Repositories;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
@@ -20,13 +21,16 @@ namespace BookManagement._1.Forms
         private JsonRepository<Book> _bookRepo = new JsonRepository<Book>(AppPaths.BooksFile);
         private JsonRepository<Reader> _readerRepo = new JsonRepository<Reader>(AppPaths.ReadersFile);
         private JsonRepository<Borrowing> _borrowRepo = new JsonRepository<Borrowing>(AppPaths.BorrowingsFile);
+        private IRepository<Book> _bookRepository = new Repository<Book>(Program.BookManagementDb);
+        private IRepository<Reader> _readerRepository = new Repository<Reader>(Program.BookManagementDb);
+        private IRepository<Borrowing> _borrowingRepository = new Repository<Borrowing>(Program.BookManagementDb);
         private int bookIdBrow;
         private int readerIdBrow;
         public MainForm()
         {
             InitializeComponent();
-            LoadBooksToGrid(_bookRepo.Load());
-            LoadReaderToGrid(_readerRepo.Load());
+            LoadBooksToGrid(_bookRepository.AsQueryable().ToList());
+            LoadReaderToGrid(_readerRepository.AsQueryable().ToList());
             LoadBorrowToGrid();
         }
         private void LoadBooksToGrid(List<Book> books)
@@ -69,10 +73,12 @@ namespace BookManagement._1.Forms
         private void LoadBorrowToGrid()
         {
             // Lấy dữ liệu gốc
-            var borrows = _borrowRepo.Load();
-            var books = _bookRepo.Load();
-            var readers = _readerRepo.Load(); // Bạn cần có JsonRepository<Reader>
-
+            //var borrows = _borrowRepo.Load();
+            var borrows = _borrowingRepository.AsQueryable().ToList();
+            //var books = _bookRepo.Load();
+            var books = _bookRepository.AsQueryable().ToList();
+            //var readers = _readerRepo.Load();
+            var readers = _readerRepository.AsQueryable().ToList();
             // Map thành danh sách ViewModel
             var borrowViewModels = borrows
                 .OrderByDescending(b => b.BorrowDate)
@@ -110,7 +116,7 @@ namespace BookManagement._1.Forms
                 Quantity = int.Parse(txtBookQuantity.Text),
             };
             _bookRepo.Add(newBook);
-            LoadBooksToGrid(_bookRepo.Load());
+            LoadBooksToGrid(_bookRepository.AsQueryable().ToList());
         }
 
         private void UpdateBook_Click(object sender, EventArgs e)
@@ -128,7 +134,7 @@ namespace BookManagement._1.Forms
             };
 
             _bookRepo.Update(updateBook);
-            LoadBooksToGrid(_bookRepo.Load());
+            LoadBooksToGrid(_bookRepository.AsQueryable().ToList());
         }
 
         private void RemoveBook_Click(object sender, EventArgs e)
@@ -136,7 +142,7 @@ namespace BookManagement._1.Forms
             var selectedBook = (Book)listBook.CurrentRow.DataBoundItem;
 
             _bookRepo.Delete(selectedBook.Id);
-            LoadBooksToGrid(_bookRepo.Load());
+            LoadBooksToGrid(_bookRepository.AsQueryable().ToList());
         }
 
         private void listBook_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -158,8 +164,9 @@ namespace BookManagement._1.Forms
                 Email = txtReaderEmail.Text,
                 Phone = txtReaderPhone.Text,
             };
-            _readerRepo.Add(newReader);
-            LoadReaderToGrid(_readerRepo.Load());
+            //_readerRepo.Add(newReader);
+            _readerRepository.AddAsync(newReader);
+            LoadReaderToGrid(_readerRepository.AsQueryable().ToList());
         }
 
         private void btnUpdateReader_Click(object sender, EventArgs e)
@@ -174,8 +181,8 @@ namespace BookManagement._1.Forms
                 Phone = txtReaderPhone.Text,
             };
 
-            _readerRepo.Update(updateReader);
-            LoadReaderToGrid(_readerRepo.Load());
+            _readerRepository.UpdateAsync(updateReader);
+            LoadReaderToGrid(_readerRepository.AsQueryable().ToList());
         }
 
         private void listReader_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -191,8 +198,8 @@ namespace BookManagement._1.Forms
         {
             var selectedReader = (Reader)listReader.CurrentRow.DataBoundItem;
 
-            _readerRepo.Delete(selectedReader.Id);
-            LoadReaderToGrid(_readerRepo.Load());
+            _readerRepository.DeleteAsync(selectedReader);
+            LoadReaderToGrid(_readerRepository.AsQueryable().ToList());
         }
 
         public void BorrowBook(int bookId, int readerId, int quantityBorrow, DateTime borrowDate, DateTime dueDate)
@@ -293,7 +300,7 @@ namespace BookManagement._1.Forms
         {
             BorrowBook(bookIdBrow, readerIdBrow, int.Parse(numericBorrowQuantity.Text), datePckrBorrowDate.Value, datePckrDueDate.Value);
             LoadBorrowToGrid();
-            LoadBooksToGrid(_bookRepo.Load());
+            LoadBooksToGrid(_bookRepository.AsQueryable().ToList());
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -301,7 +308,7 @@ namespace BookManagement._1.Forms
             var selectedBrow = (BorrowingViewModel)listBorrow.CurrentRow.DataBoundItem;
             ReturnBook(selectedBrow.Id);
             LoadBorrowToGrid();
-            LoadBooksToGrid(_bookRepo.Load());
+            LoadBooksToGrid(_bookRepository.AsQueryable().ToList());
         }
 
         private void txtBookSearch_TextChanged(object sender, EventArgs e)

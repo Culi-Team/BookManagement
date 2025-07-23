@@ -10,7 +10,7 @@ namespace BookManagement
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
-        public static BookManagementDbContext BookManagementDbContext;
+        public static BookManagementDbContext BookManagementDb;
         [STAThread]
         static void Main()
         {
@@ -19,7 +19,7 @@ namespace BookManagement
             ApplicationConfiguration.Initialize();
             AppPaths.EnsureDataFolder();
             BookManagementDbContextFactory bookManagementDbContextFactory = new BookManagementDbContextFactory();
-            BookManagementDbContext = bookManagementDbContextFactory.CreateDbContext(null);
+            BookManagementDb = bookManagementDbContextFactory.CreateDbContext(null);
             Application.Run(new MainForm());
 
         }
