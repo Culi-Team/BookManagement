@@ -33,7 +33,6 @@
             BorrowManagePage = new TabPage();
             listBorrow = new DataGridView();
             groupBox4 = new GroupBox();
-            txtQualityBrow = new TextBox();
             label15 = new Label();
             datePckrDueDate = new DateTimePicker();
             datePckrBorrowDate = new DateTimePicker();
@@ -83,6 +82,7 @@
             txtReaderSearch = new TextBox();
             label7 = new Label();
             bindingSource1 = new BindingSource(components);
+            numericBorrowQuantity = new NumericUpDown();
             tabControl1.SuspendLayout();
             BorrowManagePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)listBorrow).BeginInit();
@@ -97,6 +97,7 @@
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericBorrowQuantity).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -132,7 +133,7 @@
             // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(txtQualityBrow);
+            groupBox4.Controls.Add(numericBorrowQuantity);
             groupBox4.Controls.Add(label15);
             groupBox4.Controls.Add(datePckrDueDate);
             groupBox4.Controls.Add(datePckrBorrowDate);
@@ -151,13 +152,6 @@
             groupBox4.TabIndex = 0;
             groupBox4.TabStop = false;
             groupBox4.Text = "Quản lí mượn sách";
-            // 
-            // txtQualityBrow
-            // 
-            txtQualityBrow.Location = new Point(98, 70);
-            txtQualityBrow.Name = "txtQualityBrow";
-            txtQualityBrow.Size = new Size(105, 23);
-            txtQualityBrow.TabIndex = 12;
             // 
             // label15
             // 
@@ -353,7 +347,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(215, 72);
             label4.Name = "label4";
-            label4.Size = new Size(85, 15);
+            label4.Size = new Size(84, 15);
             label4.TabIndex = 0;
             label4.Text = "Năm xuất bản:";
             // 
@@ -378,7 +372,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(254, 29);
             label3.Name = "label3";
-            label3.Size = new Size(46, 15);
+            label3.Size = new Size(47, 15);
             label3.TabIndex = 0;
             label3.Text = "Tác giả:";
             // 
@@ -394,7 +388,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(7, 71);
             label2.Name = "label2";
-            label2.Size = new Size(81, 15);
+            label2.Size = new Size(80, 15);
             label2.TabIndex = 0;
             label2.Text = "Nhà xuất bản:";
             // 
@@ -403,7 +397,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(33, 29);
             label1.Name = "label1";
-            label1.Size = new Size(55, 15);
+            label1.Size = new Size(56, 15);
             label1.TabIndex = 0;
             label1.Text = "Tên sách:";
             // 
@@ -442,7 +436,7 @@
             label14.AutoSize = true;
             label14.Location = new Point(13, 28);
             label14.Name = "label14";
-            label14.Size = new Size(57, 15);
+            label14.Size = new Size(58, 15);
             label14.TabIndex = 3;
             label14.Text = "Tìm sách:";
             // 
@@ -545,7 +539,7 @@
             label6.AutoSize = true;
             label6.Location = new Point(393, 32);
             label6.Name = "label6";
-            label6.Size = new Size(30, 15);
+            label6.Size = new Size(31, 15);
             label6.TabIndex = 0;
             label6.Text = "SĐT:";
             // 
@@ -570,7 +564,7 @@
             label10.AutoSize = true;
             label10.Location = new Point(16, 29);
             label10.Name = "label10";
-            label10.Size = new Size(28, 15);
+            label10.Size = new Size(29, 15);
             label10.TabIndex = 0;
             label10.Text = "Tên:";
             // 
@@ -608,9 +602,16 @@
             label7.AutoSize = true;
             label7.Location = new Point(13, 31);
             label7.Name = "label7";
-            label7.Size = new Size(72, 15);
+            label7.Size = new Size(73, 15);
             label7.TabIndex = 0;
             label7.Text = "Tìm độc giả:";
+            // 
+            // numericBorrowQuantity
+            // 
+            numericBorrowQuantity.Location = new Point(98, 71);
+            numericBorrowQuantity.Name = "numericBorrowQuantity";
+            numericBorrowQuantity.Size = new Size(105, 23);
+            numericBorrowQuantity.TabIndex = 12;
             // 
             // MainForm
             // 
@@ -639,6 +640,7 @@
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericBorrowQuantity).EndInit();
             ResumeLayout(false);
         }
 
@@ -696,7 +698,7 @@
         private Button button4;
         private TextBox txtBookSearch;
         private Label label14;
-        private TextBox txtQualityBrow;
         private Label label15;
+        private NumericUpDown numericBorrowQuantity;
     }
 }

@@ -291,7 +291,7 @@ namespace BookManagement._1.Forms
         }
         private void btnBorrow_Click(object sender, EventArgs e)
         {
-            BorrowBook(bookIdBrow, readerIdBrow, int.Parse(txtQualityBrow.Text), datePckrBorrowDate.Value, datePckrDueDate.Value);
+            BorrowBook(bookIdBrow, readerIdBrow, int.Parse(numericBorrowQuantity.Text), datePckrBorrowDate.Value, datePckrDueDate.Value);
             LoadBorrowToGrid();
             LoadBooksToGrid(_bookRepo.Load());
         }

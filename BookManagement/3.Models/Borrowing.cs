@@ -15,5 +15,8 @@ namespace BookManagement._3.Models
         public DateTime DueDate { get; set; }
         public DateTime? ReturnDate { get; set; }
         public int QualityBrrow { get; set; }
+        // Navigation properties
+        public Book Book { get; set; }
+        public Reader Reader { get; set; }
     }
 }

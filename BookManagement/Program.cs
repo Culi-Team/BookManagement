@@ -1,5 +1,7 @@
 using BookManagement._1.Forms;
 using BookManagement._4.Helpers;
+using Microsoft.EntityFrameworkCore.Internal;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BookManagement
 {
@@ -8,6 +10,7 @@ namespace BookManagement
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
+        public static BookManagementDbContext BookManagementDbContext;
         [STAThread]
         static void Main()
         {
@@ -15,7 +18,10 @@ namespace BookManagement
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             AppPaths.EnsureDataFolder();
+            BookManagementDbContextFactory bookManagementDbContextFactory = new BookManagementDbContextFactory();
+            BookManagementDbContext = bookManagementDbContextFactory.CreateDbContext(null);
             Application.Run(new MainForm());
+
         }
     }
 }
