@@ -131,6 +131,7 @@ namespace BookManagement._1.Forms
                 existBook.Publisher = txtPublisher.Text;
                 existBook.Author = txtAuthor.Text;
                 existBook.Year = int.Parse(txtPublishYear.Text);
+                existBook.Quantity = int.Parse(txtBookQuantity.Text);
             }
 
             _bookRepository.UpdateAsync(existBook);
